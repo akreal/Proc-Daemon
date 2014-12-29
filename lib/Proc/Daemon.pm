@@ -152,7 +152,8 @@ sub Init {
             die "Can't <chdir> to $self->{work_dir}: $!" unless chdir $self->{work_dir};
 
             # Clear the file creation mask.
-            umask 0;
+            $self->{_orig_umask} = umask;
+            umask 066;
 
             # Detach the child from the terminal (no controlling tty), make it the
             # session-leader and the process-group-leader of a new process group.
@@ -253,6 +254,8 @@ sub Init {
                     # potential damage later.
                 }
 
+                # Restore the original file creation mask.
+                umask $self->{_orig_umask};
 
                 # Execute a system command and never return.
                 if ( $exec_command ) {

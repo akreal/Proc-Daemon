@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 
-use Test::More tests => 16;
+use Test::More tests => 18;
 
 use Cwd;
 
@@ -33,6 +33,7 @@ my $daemon = Proc::Daemon->new(
 );
 
 # create a daemon
+umask 022;
 my $Kid_PID = $daemon->init; # init instead of Init is a test for the old style too!
 
 if ( ok( $Kid_PID, "child_1 was created with PID: " . ( defined $Kid_PID ? $Kid_PID : '<undef>' ) ) || defined $Kid_PID ) {
@@ -44,6 +45,10 @@ if ( ok( $Kid_PID, "child_1 was created with PID: " . ( defined $Kid_PID ? $Kid_
         # print a new Perl file
         open( FILE, ">$cwd/kid.pl" ) || die;
         print FILE "#!/usr/bin/perl
+
+# create an empty file to test umask
+open FILE, '>umask.file';
+close FILE;
 
 # stay alive vor 10 sec.
 foreach ( 1 .. 10 ) { sleep ( 1 ) }
@@ -61,6 +66,7 @@ exit;";
             if ( ok( -e "$cwd/pid.file", "child_1 has created a 'pid.file'" ) ) {
                 my ( $pid, undef ) = $daemon->get_pid( "$cwd/pid.file" );
                 ok( $pid == $Kid_PID, "the 'pid.file' contains the right PID: $pid" );
+                ok( (stat("$cwd/pid.file"))[2] == 33152, "the 'pid.file' has right permissions" );
                 unlink "$cwd/pid.file";
             }
 
@@ -97,6 +103,9 @@ exit;";
                     if ( ok( -e "$cwd/error_1.file", "child_2 created a 'error_1.file'" ) ) {
                         unlink "$cwd/error_1.file";
                     }
+
+                    ok( (stat("$cwd/umask.file"))[2] == 33188, "the 'umask.file' has right permissions" );
+                    unlink "$cwd/umask.file";
 
                     sleep( 3 );
                     diag( 'Parent slept for 3 sec.' );
