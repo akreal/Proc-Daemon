@@ -1,0 +1,9 @@
+Changes
+lib/Proc/Daemon.pm
+lib/Proc/Daemon.pod
+Makefile.PL
+MANIFEST
+README
+t/01_loadmodule.t
+t/02_testmodule.t
+META.yml                                 Module meta-data (added by MakeMaker)
