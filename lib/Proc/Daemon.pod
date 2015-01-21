@@ -462,6 +462,12 @@ useful if it is installed (see above).
 
 
 
+=head1 REPOSITORY
+
+L<https://github.com/akreal/Proc-Daemon>
+
+
+
 
 =head1 SEE ALSO
 

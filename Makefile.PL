@@ -10,4 +10,14 @@ WriteMakefile(
 		'POSIX' => 0,
 	},
 	LICENSE => 'perl',
+	META_MERGE => {
+		'meta-spec' => { version => 2 },
+		resources => {
+			repository => {
+				type => 'git',
+				url  => 'https://github.com/akreal/Proc-Daemon.git',
+				web  => 'https://github.com/akreal/Proc-Daemon',
+			},
+		},
+	},
 );
