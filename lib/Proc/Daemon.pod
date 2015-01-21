@@ -144,7 +144,7 @@ Defines the path to the working directory of your daemon. Defaults to C</>.
 
 Sets the real user identifier (C<< $< >>) and the effective user identifier
 (C<< $> >>) for the daemon process using C<POSIX::setuid( ... )>, in case you
-want to run your daemon under an other user then the parent. Obviously the
+want to run your daemon under an other user than the parent. Obviously the
 first user must have the rights to switch to the new user otherwise it will
 stay the same. It is helpful to define the argument C<setuid> if you start your
 script at boot time by init with the superuser, but wants the daemon to run

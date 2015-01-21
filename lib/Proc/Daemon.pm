@@ -5,7 +5,7 @@
 ##      Earl Hood         earl@earlhood.com
 ##      Detlef Pilzecker  deti@cpan.org
 ##  Description:
-##      Run Perl program(s) as a daemon process, see docu in the Daemon.pod file
+##      Run Perl program(s) as a daemon process, see docs in the Daemon.pod file
 ################################################################################
 ##  Copyright (C) 1997-2011 by Earl Hood and Detlef Pilzecker.
 ##
@@ -624,7 +624,7 @@ sub get_pid_by_proc_table_attr {
 
         foreach ( @$table ) {
             # fix for Proc::ProcessTable: under some conditions $_->cmndline
-            # retruns with space and/or other characters at the end
+            # returns with space and/or other characters at the end
             next unless $_->$command =~ /^$match\s*$/;
             $pid = $_->pid;
             last;
