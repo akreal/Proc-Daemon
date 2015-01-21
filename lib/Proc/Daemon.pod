@@ -407,7 +407,7 @@ Earl Hood, earl@earlhood.com, http://www.earlhood.com/
 =back
 
 
-Co-maintainer and code writer since version 0.04:
+Co-maintainer and code writer since version 0.04 until version 0.14:
 
 =over 4
 
@@ -415,6 +415,17 @@ Co-maintainer and code writer since version 0.04:
 
 Detlef Pilzecker, http://search.cpan.org/~deti/,
 http://www.secure-sip-server.net/
+
+=back
+
+
+Co-maintainer and code writer since version 0.15:
+
+=over 4
+
+=item *
+
+Pavel Denisov, http://search.cpan.org/~akreal/
 
 =back
 
@@ -461,7 +472,7 @@ L<perl(1)>, L<POSIX>, L<Proc::ProcessTable>
 
 =head1 COPYRIGHT
 
-This module is Copyright (C) 1997-2011 by Earl Hood and Detlef Pilzecker.
+This module is Copyright (C) 1997-2015 by Earl Hood, Detlef Pilzecker and Pavel Denisov.
 
 All Rights Reserved.
 

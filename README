@@ -37,7 +37,7 @@ Documentation is in the Daemon.pod file and should automatically get installed
 with the module.
 
 ---------------------------------------------------------------------------
-COPYRIGHT (C) 1997-2011
+COPYRIGHT (C) 1997-2015
 
 Earl Hood
 earl@earlhood.com
@@ -48,6 +48,11 @@ and
 Detlef Pilzecker
 deti@cpan.org
 http://www.secure-sip-server.net/
+
+and
+
+Pavel Denisov
+akreal@cpan.org
 
 All rights reserved.
 

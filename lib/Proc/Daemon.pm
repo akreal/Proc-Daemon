@@ -4,10 +4,11 @@
 ##  Authors:
 ##      Earl Hood         earl@earlhood.com
 ##      Detlef Pilzecker  deti@cpan.org
+##      Pavel Denisov     akreal@cpan.org
 ##  Description:
 ##      Run Perl program(s) as a daemon process, see docs in the Daemon.pod file
 ################################################################################
-##  Copyright (C) 1997-2011 by Earl Hood and Detlef Pilzecker.
+##  Copyright (C) 1997-2015 by Earl Hood, Detlef Pilzecker and Pavel Denisov.
 ##
 ##  All rights reserved.
 ##

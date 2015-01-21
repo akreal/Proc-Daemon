@@ -4,7 +4,7 @@ version:             0.14
 abstract:            ~
 license:             perl
 author:              
-    - Earl Hood earl@earlhood.com, Detlef Pilzecker deti@cpan.org
+    - Earl Hood earl@earlhood.com, Detlef Pilzecker deti@cpan.org, Pavel Denisov akreal@cpan.org
 generated_by:        ExtUtils::MakeMaker version 6.42
 distribution_type:   module
 requires:     
