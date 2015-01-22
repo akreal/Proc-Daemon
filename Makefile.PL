@@ -9,6 +9,9 @@ WriteMakefile(
 	PREREQ_PM => {
 		'POSIX' => 0,
 	},
+	TEST_REQUIRES => {
+		'Proc::ProcessTable' => 0,
+	},
 	LICENSE => 'perl',
 	META_MERGE => {
 		'meta-spec' => { version => 2 },
