@@ -1,5 +1,9 @@
 Revision history for Perl module Proc::Daemon.
 
+0.15  Wed Jan 21 2015
+	- RT#91450: fix pid file permissions.
+	- RT#88512: fix typos in the documentation.
+
 0.14  Fri Jun 03 2011
 	- The filename memory is now a part of the object (not a package variable
 	  any more). This was a bug.
