@@ -260,7 +260,7 @@ sub Init {
 
                 # Execute a system command and never return.
                 if ( $exec_command ) {
-                    exec $exec_command;
+                    exec ($exec_command) or die "couldn't exec $exec_command: $!";
                     exit; # Not a real exit, but needed since Perl warns you if
                     # there is no statement like <die>, <warn>, or <exit>
                     # following <exec>. The <exec> function executes a system
