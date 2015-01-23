@@ -1,5 +1,9 @@
 Revision history for Perl module Proc::Daemon.
 
+0.16  Wed Jan 22 2015
+	- GH#1: fix Proc::ProcessTable test requirement.
+	- RT#72107: die when exec_command fails.
+
 0.15  Wed Jan 21 2015
 	- RT#91450: fix pid file permissions.
 	- RT#88512: fix typos in the documentation.
