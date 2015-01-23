@@ -298,7 +298,7 @@ sub Init {
             # will be adopted by init(8), which automatically performs a <wait>
             # to remove the zombie when the child exits.
 
-            exit;
+            POSIX::_exit(0);
         }
 
 
