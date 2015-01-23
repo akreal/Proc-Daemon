@@ -1,13 +1,9 @@
-README for Proc::Daemon
-
----------------------------------------------------------------------------
-SUMMARY
+# Summary
 
 Proc::Daemon provides the capability for a Perl program to run
 as a Unix daemon process.
 
----------------------------------------------------------------------------
-INSTALLATION
+# Installation
 
 This module can be installed on Perl 5.8.
 It was not tested on older versions but it might work.
@@ -30,13 +26,12 @@ If you'd like to see the raw output of the tests, try:
     make test TEST_VERBOSE=1
     ...
 
----------------------------------------------------------------------------
-DOCUMENTATION
+# Documentation
 
 Documentation is in the Daemon.pod file and should automatically get installed
 with the module.
 
----------------------------------------------------------------------------
+
 COPYRIGHT (C) 1997-2015
 
 Earl Hood
