@@ -6,6 +6,7 @@ WriteMakefile(
 	NAME => 'Proc::Daemon',
 	AUTHOR => 'Earl Hood earl@earlhood.com, Detlef Pilzecker deti@cpan.org, Pavel Denisov akreal@cpan.org',
 	VERSION_FROM => 'lib/Proc/Daemon.pm',
+	ABSTRACT => 'Run Perl program(s) as a daemon process',
 	PREREQ_PM => {
 		'POSIX' => 0,
 	},
