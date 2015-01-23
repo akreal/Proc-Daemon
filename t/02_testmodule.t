@@ -47,7 +47,7 @@ if ( ok( $Kid_PID, "child_1 was created with PID: " . ( defined $Kid_PID ? $Kid_
         print FILE "#!/usr/bin/perl
 
 # create an empty file to test umask
-open FILE, '>umask.file';
+open FILE, '>$cwd/umask.file';
 close FILE;
 
 # stay alive vor 10 sec.
@@ -104,9 +104,6 @@ exit;";
                         unlink "$cwd/error_1.file";
                     }
 
-                    ok( (stat("$cwd/umask.file"))[2] == 33188, "the 'umask.file' has right permissions" );
-                    unlink "$cwd/umask.file";
-
                     sleep( 3 );
                     diag( 'Parent slept for 3 sec.' );
 
@@ -127,6 +124,9 @@ exit;";
                     ok( $pid != $Kid_PID2, "'kid.pl' daemon was stopped within $r sec." );
 
                     unlink "$cwd/pid_1.file";
+
+                    ok( (stat("$cwd/umask.file"))[2] == 33188, "the 'umask.file' has right permissions" );
+                    unlink "$cwd/umask.file";
                 }
 
                 unlink "$cwd/kid.pl";
