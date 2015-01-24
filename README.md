@@ -31,6 +31,7 @@ If you'd like to see the raw output of the tests, try:
 Documentation is in the Daemon.pod file and should automatically get installed
 with the module.
 
+# Copyright and license
 
 COPYRIGHT (C) 1997-2015
 
