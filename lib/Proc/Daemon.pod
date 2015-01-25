@@ -391,7 +391,7 @@ the C<Proc::ProcessTable> module to be installed.
 
 C<Proc::Daemon::init> is still available for backwards capability.
 
-
+Proc::Daemon is now taint safe (assuming it is not passed any tainted parameters).
 
 
 =head1 AUTHORS
