@@ -85,6 +85,9 @@ exit;";
             if ( ok( -e "$cwd/kid.pl", "child_1 has created the 'kid.pl' file" ) ) {
                 my $Kid_PID2 = $daemon->Init( { 
                     exec_command => "perl $cwd/kid.pl",
+                    # this is essentially a noop but gives us better test coverage
+                    setgid => (split / /, $))[0],
+                    setuid => $>,
                 } );
 
                 if ( ok( $Kid_PID2, "child_2 was created with PID: " . ( defined $Kid_PID2 ? $Kid_PID2 : '<undef>' ) ) ) {

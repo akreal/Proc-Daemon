@@ -31,6 +31,7 @@ $Proc::Daemon::VERSION = '0.17';
 #
 #   %Daemon_Settings are hash key=>values and can be:
 #     work_dir     => '/working/daemon/directory'   -> defaults to '/'
+#     setgid       => 12345                         -> defaults to <undef>
 #     setuid       => 12345                         -> defaults to <undef>
 #     child_STDIN  => '/path/to/daemon/STDIN.file'  -> defautls to '</dev/null'
 #     child_STDOUT => '/path/to/daemon/STDOUT.file' -> defaults to '+>/dev/null'
@@ -227,6 +228,12 @@ sub Init {
                         else { $hc_fd = $_ if POSIX::close( $_ ) }
                     }
                 }
+
+                # Sets the real group identifier and the effective group
+                # identifier for the daemon process before opening files.
+                # Must set group first because you cannot change group
+                # once you have changed user
+                POSIX::setgid( $self->{setgid} ) if defined $self->{setgid};
 
                 # Sets the real user identifier and the effective user
                 # identifier for the daemon process before opening files.
