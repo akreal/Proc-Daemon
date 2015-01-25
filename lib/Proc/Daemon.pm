@@ -323,6 +323,7 @@ sub Init {
     if ( $FH_MEMORY ) {
         seek( $FH_MEMORY, 0, 0 );
         @pid = map { chomp $_; $_ eq '' ? undef : $_ } <$FH_MEMORY>;
+        $_ = (/^(\d+)$/)[0] foreach @pid; # untaint
         close $FH_MEMORY;
     }
     elsif ( $self->{memory}{pid_file} ) {
@@ -550,8 +551,8 @@ sub get_pid {
 
     if ( $string ) {
         # $string is already a PID.
-        if ( $string =~ /^\d+$/ ) {
-            $pid = $string;
+        if ( $string =~ /^(\d+)$/ ) {
+            $pid = $1; # untaint
         }
         # Open the pidfile and get the PID from it.
         elsif ( open( my $FH_MEMORY, "<", $string ) ) {
@@ -559,6 +560,7 @@ sub get_pid {
             close $FH_MEMORY;
 
             die "I found no valid PID ('$pid') in the pidfile: '$string'" if $pid =~ /\D/s;
+            $pid = ($pid =~ /^(\d+)$/)[0]; # untaint
 
             $pidfile = $string;
         }
@@ -576,8 +578,12 @@ sub get_pid {
             $pid = <$FH_MEMORY>;
             close $FH_MEMORY;
 
-            if ( ! $pid || ( $pid && $pid =~ /\D/s ) ) { $pid = undef }
-            else { $pidfile = $self->{pid_file} }
+            if ($pid && $pid =~ /^(\d+)$/) {
+                $pid = $1; # untaint
+                $pidfile = $self->{pid_file};
+            } else {
+                $pid = undef;
+            }
         }
 
         # Try to get the PID out of the system process

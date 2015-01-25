@@ -22,6 +22,7 @@ use Proc::Daemon;
 my $cwd = Cwd::cwd();
 chdir 't' if $cwd !~ m{/t$};
 $cwd = Cwd::cwd();
+$cwd = ($cwd =~ /^(.*)$/)[0]; # untaint (needed for 03_taintmode)
 
 
 # create object
