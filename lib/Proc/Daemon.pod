@@ -150,6 +150,13 @@ stay the same. It is helpful to define the argument C<setuid> if you start your
 script at boot time by init with the superuser, but wants the daemon to run
 under a normal user account.
 
+=item setgid
+
+Sets the real group identifier (C<$(>) and the effective group identifier
+(C<$)>) for the daemon process using C<POSXI::setgid( ... )>, just like
+C<setuid>.  As with C<setuid>, the first user must have the rights to switch to the
+new group, otherwise the group id will not be changed.
+
 
 =item child_STDIN
 
