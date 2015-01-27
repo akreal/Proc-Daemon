@@ -1,5 +1,9 @@
 Revision history for Perl module Proc::Daemon.
 
+0.18  Mon Jan 26 2015
+	- GH#2: make Proc::Daemon internally taint safe (Rob Van Dam).
+	- GH#3: add option to setgid, same as setuid (Rob Van Dam).
+
 0.17  Fri Jan 23 2015
 	- Move umask test to the end, should fix some failures from CPAN Testers.
 	- RT#73352: replace exit with POSIX::_exit(0) in the "first child".
