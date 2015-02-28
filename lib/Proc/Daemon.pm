@@ -42,6 +42,7 @@ $Proc::Daemon::VERSION = '0.18';
 #       descriptors you do not want to be closed in the daemon.
 #     pid_file =>     '/path/to/pid/file.txt'       -> defaults to
 #       undef (= write no file).
+#     file_umask   => 022                           -> defaults to 066
 #     exec_command => 'perl /home/script.pl'        -> execute a system command
 #       via Perls *exec PROGRAM* at the end of the Init routine and never return.
 #       Must be an arrayref if you want to create several daemons at once.
@@ -153,9 +154,9 @@ sub Init {
             # Set the new working directory.
             die "Can't <chdir> to $self->{work_dir}: $!" unless chdir $self->{work_dir};
 
-            # Clear the file creation mask.
+            # Set the file creation mask.
             $self->{_orig_umask} = umask;
-            umask 066;
+            umask($self->{file_umask});
 
             # Detach the child from the terminal (no controlling tty), make it the
             # session-leader and the process-group-leader of a new process group.
@@ -371,6 +372,8 @@ sub adjust_settings {
 
         $self->fix_filename( 'pid_file' );
     }
+
+    $self->{file_umask} ||= 066;
 
     return;
 }
