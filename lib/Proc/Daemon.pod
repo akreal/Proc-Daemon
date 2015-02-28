@@ -211,8 +211,9 @@ daemon process will be stored. Defaults to C<undef> (= write no file).
 
 =item file_umask
 
-Defines umask for C<pid_file>, C<child_STDOUT> and C<child_STDERR> files.
-Defaults to C<066> (other users may not modify or read the files).
+Defines umask for C<pid_file>, C<child_STDIN>, C<child_STDOUT> and
+C<child_STDERR> files. Defaults to C<066> (other users may not modify or
+read the files).
 
 
 =item exec_command
