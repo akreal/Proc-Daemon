@@ -1,5 +1,8 @@
 Revision history for Perl module Proc::Daemon.
 
+0.19  Sat Mar 21 2015
+	- RT#102360: add file_umask option (Cyrille Mastchenko).
+
 0.18  Mon Jan 26 2015
 	- GH#2: make Proc::Daemon internally taint safe (Rob Van Dam).
 	- GH#3: add option to setgid, same as setuid (Rob Van Dam).
