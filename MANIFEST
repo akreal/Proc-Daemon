@@ -1,8 +1,0 @@
-Changes
-lib/Proc/Daemon.pm
-lib/Proc/Daemon.pod
-Makefile.PL
-MANIFEST
-README.md
-t/01_loadmodule.t
-t/02_testmodule.t
