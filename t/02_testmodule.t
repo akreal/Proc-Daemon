@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 
-use Test::More tests => 18;
+use Test::More tests => 19;
 
 use Cwd;
 
@@ -138,3 +138,16 @@ exit;";
         }
     }
 }
+
+my $daemon2 = Proc::Daemon->new(
+    work_dir     => $cwd,
+    child_STDOUT => 'output2.file',
+    child_STDERR => 'error2.file',
+    pid_file     => 'pid2.file',
+    file_umask   => 022,
+);
+
+my $Kid_PID2 = $daemon2->Init;
+
+ok( (stat("$cwd/pid2.file"))[2] == 33188, "the 'pid2.file' has right permissions via file_umask" );
+unlink "$cwd/output2.file", "$cwd/error2.file", "$cwd/pid2.file";
