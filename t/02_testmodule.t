@@ -151,3 +151,5 @@ my $Kid_PID2 = $daemon2->Init;
 
 ok( (stat("$cwd/pid2.file"))[2] == 33188, "the 'pid2.file' has right permissions via file_umask" );
 unlink "$cwd/output2.file", "$cwd/error2.file", "$cwd/pid2.file";
+
+1;
