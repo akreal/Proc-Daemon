@@ -51,17 +51,17 @@ if ( ok( $Kid_PID, "child_1 was created with PID: " . ( defined $Kid_PID ? $Kid_
 open FILE, '>$cwd/umask.file';
 close FILE;
 
-# stay alive vor 10 sec.
-foreach ( 1 .. 10 ) { sleep ( 1 ) }
+# stay alive forever
+while ( 1 ) { sleep ( 1 ) }
 
 exit;";
         close( FILE );
     }
     # this is only for the parent
     else {
-        # wait max. 5 sec. for the child to exit
+        # wait max. 1 min. for the child to exit
         my $r = 0;
-        while ( $daemon->Status( $Kid_PID ) and $r <= 5 ) { $r++; sleep( 1 ); }
+        while ( $daemon->Status( $Kid_PID ) and $r <= 60 ) { $r++; sleep( 1 ); }
 
         if ( ok( ! $daemon->Status( $Kid_PID ), "child_1 process did exit within $r sec." ) ) {
             if ( ok( -e "$cwd/pid.file", "child_1 has created a 'pid.file'" ) ) {
@@ -96,9 +96,9 @@ exit;";
                         ok( $pid == $Kid_PID2, "the 'pid_1.file' contains the right PID: $pid" )
                     }
 
-                    # wait max. 5 sec. for the (second) child to write all files
+                    # wait max. 1 min. for the (second) child to write all files
                     $r = 0;
-                    while ( ! -e "$cwd/error_1.file" and $r <= 5 ) { $r++; sleep( 1 ); }
+                    while ( ! -e "$cwd/error_1.file" and $r <= 60 ) { $r++; sleep( 1 ); }
 
                     if ( ok( -e "$cwd/output_1.file", "child_2 created a 'output_1.file'" ) ) {
                         unlink "$cwd/output_1.file";
@@ -107,9 +107,6 @@ exit;";
                     if ( ok( -e "$cwd/error_1.file", "child_2 created a 'error_1.file'" ) ) {
                         unlink "$cwd/error_1.file";
                     }
-
-                    sleep( 3 );
-                    diag( 'Parent slept for 3 sec.' );
 
                     my $pid = $daemon->get_pid_by_proc_table_attr( 'cmndline', "perl $cwd/kid.pl", 1 );
                     diag( "Proc::ProcessTable is installed and did find the right PID for 'perl $cwd/kid.pl': $pid" )
@@ -122,7 +119,7 @@ exit;";
                     ok( $stopped == 1, "stop daemon 'kid.pl'" );
 
                     $r = 0;
-                    while ( $pid = $daemon->Status( $Kid_PID2 ) and $r <= 10 ) {
+                    while ( $pid = $daemon->Status( $Kid_PID2 ) and $r <= 60 ) {
                         $r++; sleep( 1 );
                     }
                     ok( $pid != $Kid_PID2, "'kid.pl' daemon was stopped within $r sec." );
@@ -149,7 +146,13 @@ my $daemon2 = Proc::Daemon->new(
 
 my $Kid_PID2 = $daemon2->Init;
 
-ok( (stat("$cwd/pid2.file"))[2] == 33188, "the 'pid2.file' has right permissions via file_umask" );
-unlink "$cwd/output2.file", "$cwd/error2.file", "$cwd/pid2.file";
+if ( $Kid_PID2 ) {
+    # wait max. 1 min. for the child to exit
+    my $r = 0;
+    while ( $daemon2->Status( $Kid_PID2 ) and $r <= 60 ) { $r++; sleep( 1 ); }
+
+    ok( (stat("$cwd/pid2.file"))[2] == 33188, "the 'pid2.file' has right permissions via file_umask" );
+    unlink "$cwd/output2.file", "$cwd/error2.file", "$cwd/pid2.file";
+}
 
 1;
