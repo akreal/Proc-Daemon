@@ -1,5 +1,9 @@
 Revision history for Perl module Proc::Daemon.
 
+0.20  Wed Jun 24 2015
+	- GH#4: fix taint safe test (rouzier).
+	- RT#103130: make tests less time-sensitive (Remi Collet, ppisar).
+
 0.19  Sat Mar 21 2015
 	- RT#102360: add file_umask option (Cyrille Mastchenko).
 
