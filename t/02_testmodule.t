@@ -91,18 +91,20 @@ exit;";
                 } );
 
                 if ( ok( $Kid_PID2, "child_2 was created with PID: " . ( defined $Kid_PID2 ? $Kid_PID2 : '<undef>' ) ) ) {
+                    wait_for_file("$cwd/pid_1.file");
+
                     if ( ok( -e "$cwd/pid_1.file", "child_2 created a 'pid_1.file'" ) ) {
                         my ( $pid, undef ) = $daemon->get_pid( "$cwd/pid_1.file" );
                         ok( $pid == $Kid_PID2, "the 'pid_1.file' contains the right PID: $pid" )
                     }
 
-                    # wait max. 1 min. for the (second) child to write all files
-                    $r = 0;
-                    while ( ! -e "$cwd/error_1.file" and $r <= 60 ) { $r++; sleep( 1 ); }
+                    wait_for_file("$cwd/output_1.file");
 
                     if ( ok( -e "$cwd/output_1.file", "child_2 created a 'output_1.file'" ) ) {
                         unlink "$cwd/output_1.file";
                     }
+
+                    wait_for_file("$cwd/error_1.file");
 
                     if ( ok( -e "$cwd/error_1.file", "child_2 created a 'error_1.file'" ) ) {
                         unlink "$cwd/error_1.file";
@@ -114,6 +116,8 @@ exit;";
 
                     $pid = $daemon->Status( "$cwd/pid_1.file" );
                     ok( $pid == $Kid_PID2, "'kid.pl' daemon is still running" );
+
+                    wait_for_file("$cwd/umask.file");
 
                     my $stopped = $daemon->Kill_Daemon();
                     ok( $stopped == 1, "stop daemon 'kid.pl'" );
@@ -153,6 +157,12 @@ if ( $Kid_PID2 ) {
 
     ok( (stat("$cwd/pid2.file"))[2] == 33188, "the 'pid2.file' has right permissions via file_umask" );
     unlink "$cwd/output2.file", "$cwd/error2.file", "$cwd/pid2.file";
+}
+
+sub wait_for_file {
+    my $file = shift;
+    my $r = 0;
+    while ( ! -e $file and $r <= 60 ) { $r++; sleep( 1 ); }
 }
 
 1;
