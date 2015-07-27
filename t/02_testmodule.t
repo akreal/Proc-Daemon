@@ -100,22 +100,23 @@ exit;";
 
                     wait_for_file("$cwd/output_1.file");
 
-                    if ( ok( -e "$cwd/output_1.file", "child_2 created a 'output_1.file'" ) ) {
-                        unlink "$cwd/output_1.file";
-                    }
+                    ok( -e "$cwd/output_1.file", "child_2 created a 'output_1.file'" );
 
                     wait_for_file("$cwd/error_1.file");
 
-                    if ( ok( -e "$cwd/error_1.file", "child_2 created a 'error_1.file'" ) ) {
-                        unlink "$cwd/error_1.file";
-                    }
+                    ok( -e "$cwd/error_1.file", "child_2 created a 'error_1.file'" );
 
                     my $pid = $daemon->get_pid_by_proc_table_attr( 'cmndline', "perl $cwd/kid.pl", 1 );
                     diag( "Proc::ProcessTable is installed and did find the right PID for 'perl $cwd/kid.pl': $pid" )
                         if defined $pid and $pid == $Kid_PID2;
 
                     $pid = $daemon->Status( "$cwd/pid_1.file" );
-                    ok( $pid == $Kid_PID2, "'kid.pl' daemon is still running" );
+                    if (! ok( $pid == $Kid_PID2, "'kid.pl' daemon is still running" )) {
+                        diag("$pid != $Kid_PID2");
+                        diag("STDOUT:\n" . `cat $cwd/output_1.file`);
+                        diag("STDERR:\n" . `cat $cwd/error_1.file`);
+                        diag("$cwd:\n" . `ls -lt $cwd`);
+                    }
 
                     wait_for_file("$cwd/umask.file");
 
@@ -129,6 +130,8 @@ exit;";
                     ok( $pid != $Kid_PID2, "'kid.pl' daemon was stopped within $r sec." );
 
                     unlink "$cwd/pid_1.file";
+                    unlink "$cwd/error_1.file";
+                    unlink "$cwd/output_1.file";
 
                     ok( (stat("$cwd/umask.file"))[2] == 33188, "the 'umask.file' has right permissions" );
                     unlink "$cwd/umask.file";
