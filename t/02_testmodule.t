@@ -120,7 +120,6 @@ exit;";
                     $pid = $daemon->Status( "$cwd/pid_1.file" );
                     if (! ok( $pid == $Kid_PID2, "'kid.pl' daemon is still running" )) {
                         diag("$pid != $Kid_PID2");
-                        diag("permissions: " . join ',', map { (stat $_)[2] & 07777 } grep {defined && -d} $ENV{'PATH'} =~ /([^:]+)/g);
                         diag("STDOUT:\n" . `cat $cwd/output_1.file`);
                         diag("STDERR:\n" . `cat $cwd/error_1.file`);
                         diag("$cwd:\n" . `ls -lt $cwd`);
