@@ -1,5 +1,9 @@
 Revision history for Perl module Proc::Daemon.
 
+0.21  Thu Aug  6 2015
+	- GH#5: make tests less time-sensitive (Stefan Parvu).
+	- RT#103130: fix taint safe test (Håkon Hægland).
+
 0.20  Wed Jun 24 2015
 	- GH#4: fix taint safe test (rouzier).
 	- RT#103130: make tests less time-sensitive (Remi Collet, ppisar).
