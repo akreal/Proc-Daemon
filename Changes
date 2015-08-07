@@ -32,7 +32,7 @@ Revision history for Perl module Proc::Daemon.
 
 0.13  Wed Jun 01 2011
 	- Add ability to define the user identifier for the daemon if you want to
-	  run it under other user then the parent (request from Holger Gl‰ss).
+	  run it under other user then the parent (request from Holger Gl√§ss).
 	- Add <eval> and <warn> for OS not supporting POSIX::setsid (e.g. Windows).
 	- Updated the documentation.
 
@@ -50,7 +50,7 @@ Revision history for Perl module Proc::Daemon.
 	  the child (daemon).
 	- Updated the documentation.
 	- In some environment it is not allowed to open anonymous files. In this
-	  case now a 'pid_file' must be defined. Thanks to Holger Gl‰ss for
+	  case now a 'pid_file' must be defined. Thanks to Holger Gl√§ss for
 	  reporting.
 
 0.10  Fri Apr 01 2011
