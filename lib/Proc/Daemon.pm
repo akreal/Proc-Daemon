@@ -22,7 +22,7 @@ package Proc::Daemon;
 use strict;
 use POSIX();
 
-$Proc::Daemon::VERSION = '0.21';
+$Proc::Daemon::VERSION = '0.22';
 
 
 ################################################################################
