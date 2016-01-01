@@ -14,7 +14,7 @@ if (${^TAINT}) {
     # blindly untaint PATH (since there's no way we can know what is safe)
     # hopefully anyone using Proc::Daemon in taint mode will set PATH more carefully
     # update: let's try to remove things known (reported) to be unsafe
-    $ENV{'PATH'} = join ':', grep { defined && -d && ((stat $_)[2] & 07777) < 494 } $ENV{'PATH'} =~ /([^:]+)/g;
+    $ENV{'PATH'} = join ':', grep { $_ ne '.' && defined && -d && ((stat $_)[2] & 07777) < 494 } $ENV{'PATH'} =~ /([^:]+)/g;
     delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
 }
 
