@@ -1,5 +1,8 @@
 Revision history for Perl module Proc::Daemon.
 
+0.23  Fri Jan  1 2016
+	- RT#110330: fix taint safe test (Owen Boyle).
+
 0.22  Wed Oct 28 2015
 	- RT#108012: force all tests to be executed sequentially (Alceu Rodrigues de Freitas Junior).
 
