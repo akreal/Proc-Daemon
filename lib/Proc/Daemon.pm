@@ -20,6 +20,7 @@
 package Proc::Daemon;
 
 use strict;
+use warnings;
 use POSIX();
 
 $Proc::Daemon::VERSION = '0.23';
